@@ -107,13 +107,9 @@ class Learndash_Extend_Expiry_Admin {
 
 	public function require_learndash_dependents() {
 		if ( defined( 'LEARNDASH_LMS_PLUGIN_DIR' ) ) {
-			require_once LEARNDASH_LMS_PLUGIN_DIR . 'includes/settings/class-ld-settings-metaboxes.php';
-
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/helpers/class-imm-learndash-ls-access-control.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/helpers/class-imm-learndash-ls-template-manager.php';
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/settings/class-imm-learndash-settings-helper.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/settings/class-imm-learndash-sell-settings.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/settings/class-ld-extend-expiry-settings.php';
 
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/payments/class-imm-learndash-ls-payment-integration.php';
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/payments/paypal/class-ld-extend-expiry-paypal.php';
