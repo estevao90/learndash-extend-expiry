@@ -21,24 +21,9 @@ Use [localtunnel](https://github.com/localtunnel/localtunnel) to test PayPal IPN
 npm install -g localtunnel
 
 # start tunnel to port 80
-# put the generated url in the LD PayPal settings configurations in the "PayPal Notify URL" option
+# put the generated url in the LD PayPal settings configurations in the "PayPal Notify URL" options
 # example: https://swift-eagle-45.loca.lt/sfwd-lms/paypal
 lt -p 80 --print-requests true
-```
-
-### stripe-cli
-
-Use [stripe-cli](https://stripe.com/docs/stripe-cli) to test the LearnDash buy option.
-
-Cards to test can be found [here](https://stripe.com/docs/testing#cards).
-
-```sh
-# login into stripe account
-stripe login
-
-# listen and forward events to LearnDash
-# add the output "webhook signing secret" in the LearnDash Stripe configuration in the "Test Endpoint Secret" option
-stripe listen --forward-to http://localhost/?learndash-integration=stripe
 ```
 
 ### Helpful Commands

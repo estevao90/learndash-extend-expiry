@@ -98,7 +98,7 @@ class Learndash_Extend_Expiry_Admin {
 			echo '<div class="notice notice-error is-dismissible"><p><strong>' .
 				sprintf(
 					/* translators: %s: LearnDash URL */
-					esc_html__( 'Sell Lessons for LearnDash requires LearnDash to be installed and active. Please download and install %s.', 'learndash-extend-expiry' ),
+					esc_html__( 'LearnDash LMS - Extend Expiry requires LearnDash to be installed and active. Please download and install %s.', 'learndash-extend-expiry' ),
 					'<a href="https://www.learndash.com/" target="_blank">LearnDash</a>'
 				) .
 				'</strong></p></div>';
@@ -115,13 +115,8 @@ class Learndash_Extend_Expiry_Admin {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/settings/class-imm-learndash-settings-helper.php';
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/settings/class-imm-learndash-sell-settings.php';
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/ld-sell/class-imm-learndash-lesson-sell.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/ld-sell/class-imm-learndash-quiz-sell.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/ld-sell/class-imm-learndash-topic-sell.php';
-
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/payments/class-imm-learndash-ls-payment-integration.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/payments/paypal/class-imm-learndash-ls-paypal.php';
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/payments/stripe/class-imm-learndash-ls-stripe.php';
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/payments/paypal/class-ld-extend-expiry-paypal.php';
 		}
 	}
 }

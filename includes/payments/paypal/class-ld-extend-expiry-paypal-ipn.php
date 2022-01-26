@@ -7,9 +7,9 @@ if ( ! defined( 'LEARNDASH_VERSION' ) || ! defined( 'LEARNDASH_EXTEND_EXPIRY_VER
 	exit;
 }
 
-if ( ! class_exists( 'Imm_Learndash_Ls_PayPal_IPN' ) ) {
+if ( ! class_exists( 'Ld_Extend_Expiry_Paypal_IPN' ) ) {
 
-	class Imm_Learndash_Ls_PayPal_IPN {
+	class Ld_Extend_Expiry_Paypal_IPN {
 
 		private static $ipn_transaction_log;
 		private static $ipn_transaction_data;
@@ -494,4 +494,4 @@ if ( ! class_exists( 'Imm_Learndash_Ls_PayPal_IPN' ) ) {
 		// End of functions.
 	}
 }
-Imm_Learndash_Ls_PayPal_IPN::ipn_process();
+Ld_Extend_Expiry_Paypal_IPN::ipn_process();
