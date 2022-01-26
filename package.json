@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@wordpress/babel-preset-default": ">=6",
+    "@wordpress/eslint-plugin": ">=9",
+    "@wordpress/stylelint-config": ">=19",
+    "eslint": ">=8",
+    "postcss": ">=8",
+    "prettier": ">=2",
+    "prettier-eslint": ">=13",
+    "prettier-eslint-cli": ">=5",
+    "prettier-stylelint": ">=0",
+    "stylelint": ">=14"
+  }
+}

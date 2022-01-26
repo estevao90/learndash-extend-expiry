@@ -1,0 +1,27 @@
+{
+  "phpcs.enable": true,
+  "phpcs.executablePath": "vendor/bin/phpcs",
+  "phpcs.standard": ".phpcs.xml",
+  "phpcbf.enable": true,
+  "phpcbf.documentFormattingProvider": true,
+  "phpcbf.onsave": true,
+  "phpcbf.executablePath": "vendor/bin/phpcbf",
+  "phpcbf.standard": ".phpcs.xml",
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[css]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "eslint.format.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.options": {
+    "resolvePluginsRelativeTo": "."
+  }
+}

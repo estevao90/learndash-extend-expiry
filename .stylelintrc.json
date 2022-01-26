@@ -1,0 +1,7 @@
+{
+  "extends": "@wordpress/stylelint-config/scss",
+  "ignoreFiles": ["**/vendor/**/*.css", "**/*.min.css"],
+  "rules": {
+    "selector-class-pattern": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "require-dev": {
+    "squizlabs/php_codesniffer": ">=3",
+    "wp-coding-standards/wpcs": ">=2",
+    "dealerdirect/phpcodesniffer-composer-installer": ">=0",
+    "phpcompatibility/phpcompatibility-wp": ">=2"
+  },
+  "scripts": {
+    "php:lint": "phpcs .",
+    "php:fix": "phpcbf .",
+    "js:lint": "npx eslint **/*.js --resolve-plugins-relative-to .",
+    "js:fix": "npx eslint **/*.js --resolve-plugins-relative-to . --fix",
+    "css:lint": "npx stylelint **/*.{css,scss}",
+    "css:fix": "npx stylelint **/*.{css,scss} --fix",
+    "lint": [
+      "@php:lint",
+      "@js:lint",
+      "@css:lint"
+    ],
+    "fix": [
+      "@php:fix",
+      "@js:fix",
+      "@css:fix"
+    ]
+  }
+}
