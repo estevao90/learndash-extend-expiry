@@ -88,13 +88,13 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Base', false ) ) {
 			ob_start();
 
 			if ( $this->is_paypal_active() ) {
-				$stripe_button_text = apply_filters( 'learndash_stripe_purchase_button_text', __( 'Use a Credit Card', 'learndash-lessons-selling' ) );
+				$stripe_button_text = apply_filters( 'learndash_stripe_purchase_button_text', __( 'Use a Credit Card', 'learndash-extend-expiry' ) );
 			} else {
 				$stripe_button_text = apply_filters(
 					'learndash_stripe_purchase_button_text',
 					sprintf(
 					// translators: placeholder: LearnDash module name.
-						esc_html_x( 'Take this %s', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( 'Take this %s', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						ucfirst( Imm_Learndash_Ls_Access_Control::get_label_for_ld_resource( $this->ld_resource->ID ) )
 					)
 				);

@@ -9,7 +9,7 @@ if ( ! class_exists( 'Imm_Learndash_Lesson_Sell', false ) ) {
 		public function __construct() {
 			parent::__construct(
 				'lesson',
-				esc_html__( 'lesson', 'learndash-lessons-selling' )
+				esc_html__( 'lesson', 'learndash-extend-expiry' )
 			);
 
 			// add hooks
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Imm_Learndash_Lesson_Sell', false ) ) {
 				case 'open':
 					$attributes[] = array(
 						// translators: placeholder: Lesson.
-						'label' => sprintf( esc_html_x( 'Open %s', 'placeholder: Lesson', 'learndash-lessons-selling' ), LearnDash_Custom_Label::get_label( 'lesson' ) ),
+						'label' => sprintf( esc_html_x( 'Open %s', 'placeholder: Lesson', 'learndash-extend-expiry' ), LearnDash_Custom_Label::get_label( 'lesson' ) ),
 						'icon'  => 'ld-icon-unlocked',
 						'class' => 'ld-status-unlocked ld-primary-color',
 					);
@@ -84,7 +84,7 @@ if ( ! class_exists( 'Imm_Learndash_Lesson_Sell', false ) ) {
 				case 'free':
 					$attributes[] = array(
 						// translators: placeholder: Lesson.
-						'label' => sprintf( esc_html_x( 'Free %s', 'placeholder: Lesson', 'learndash-lessons-selling' ), LearnDash_Custom_Label::get_label( 'lesson' ) ),
+						'label' => sprintf( esc_html_x( 'Free %s', 'placeholder: Lesson', 'learndash-extend-expiry' ), LearnDash_Custom_Label::get_label( 'lesson' ) ),
 						'icon'  => 'ld-icon-login',
 						'class' => 'ld-primary-color' . ( is_user_logged_in() ? ' ld-status-unlocked ' : '' ),
 					);
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Imm_Learndash_Lesson_Sell', false ) ) {
 					);
 					// define attribute
 					$attributes[] = array(
-						'label' => esc_html__( 'Sold individually', 'learndash-lessons-selling' ),
+						'label' => esc_html__( 'Sold individually', 'learndash-extend-expiry' ),
 						'icon'  => 'ld-icon-materials',
 						'class' => 'ld-primary-color' . ( $has_access ? ' ld-status-unlocked ' : '' ),
 					);

@@ -21,7 +21,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Checkout', false ) ) {
 		 */
 		public function ajax_init_checkout() {
 			if ( ! $this->is_transaction_legit() ) {
-				wp_die( esc_html__( 'Cheatin\' huh?', 'learndash-lessons-selling' ) );
+				wp_die( esc_html__( 'Cheatin\' huh?', 'learndash-extend-expiry' ) );
 			}
 
 			$resource_id = intval( $_POST['stripe_resource_id'] ); //phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -320,7 +320,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Checkout', false ) ) {
 
 			switch ( $_GET['imm_ld_stripe'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				case 'success':
-					$message = __( 'Your transaction was successful. Please log in to access your course.', 'learndash-lessons-selling' );
+					$message = __( 'Your transaction was successful. Please log in to access your course.', 'learndash-extend-expiry' );
 					break;
 
 				default:

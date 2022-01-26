@@ -25,10 +25,10 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Paypal', false ) ) {
 
 				$setting_option_fields[ self::SETTING_NAME ] = array(
 					'name'      => self::SETTING_NAME,
-					'label'     => esc_html__( 'IMM Lessons Selling PayPal Notify URL', 'learndash-lessons-selling' ),
+					'label'     => esc_html__( 'IMM Lessons Selling PayPal Notify URL', 'learndash-extend-expiry' ),
 					'type'      => 'text',
 					'value'     => $this->get_paypal_notifyurl(),
-					'help_text' => esc_html__( 'Enter the URL used for IMM Lessons Selling IPN notifications.', 'learndash-lessons-selling' ),
+					'help_text' => esc_html__( 'Enter the URL used for IMM Lessons Selling IPN notifications.', 'learndash-extend-expiry' ),
 				);
 			}
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Paypal', false ) ) {
 						/**
 						 * Include PayPal IPN
 						 */
-						require_once LEARNDASH_LESSONS_SELLING_PLUGIN_DIR . 'includes/payments/paypal/class-imm-learndash-ls-paypal-ipn.php';
+						require_once LEARNDASH_EXTEND_EXPIRY_PLUGIN_DIR . 'includes/payments/paypal/class-imm-learndash-ls-paypal-ipn.php';
 				}
 			}
 		}

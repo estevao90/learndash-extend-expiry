@@ -20,7 +20,7 @@
  * @subpackage Learndash_Extend_Expiry/includes
  * @author     Estevão Costa <estevao90@gmail.com>
  */
-class Learndash_Lessons_Selling_Loader {
+class Learndash_Extend_Expiry_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

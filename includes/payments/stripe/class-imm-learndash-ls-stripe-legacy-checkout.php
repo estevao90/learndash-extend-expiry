@@ -29,7 +29,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 				if ( ( isset( $_POST['stripe_token_id'] ) ) && ( ! empty( $_POST['stripe_token_id'] ) ) ) {
 					$token_id = sanitize_text_field( $_POST['stripe_token_id'] );
 				} else {
-					$transaction_status['stripe_message'] = __( 'No token found. Please activate javascript to make a purchase.', 'learndash-lessons-selling' );
+					$transaction_status['stripe_message'] = __( 'No token found. Please activate javascript to make a purchase.', 'learndash-extend-expiry' );
 					$this->show_notification( $transaction_status );
 				}
 				$transaction_status['token_id'] = $token_id;
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 				$transaction_status['resource_id'] = $resource_id;
 
 				if ( ! $this->is_transaction_legit() ) {
-					$transaction_status['stripe_message'] = __( 'The resource form data doesn\'t match with the official resource data. Cheatin\' huh?', 'learndash-lessons-selling' );
+					$transaction_status['stripe_message'] = __( 'The resource form data doesn\'t match with the official resource data. Cheatin\' huh?', 'learndash-extend-expiry' );
 					$this->show_notification( $transaction_status );
 				}
 
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 
 						} else {
 							$error_code                           = $new_user->get_error_code();
-							$transaction_status['stripe_message'] = __( 'Failed to create a new user account. Please try again. Reason: ', 'learndash-lessons-selling' ) . $new_user->get_error_message( $error_code );
+							$transaction_status['stripe_message'] = __( 'Failed to create a new user account. Please try again. Reason: ', 'learndash-extend-expiry' ) . $new_user->get_error_message( $error_code );
 							$this->show_notification( $transaction_status );
 						}
 					} else {
@@ -137,7 +137,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( \Stripe\Error\Authetication $e ) {
@@ -145,7 +145,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( \Stripe\Error\ApiConnection $e ) {
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( \Stripe\Error\Base $e ) {
@@ -161,14 +161,14 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( Exception $e ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 					}
 				} elseif ( 'subscribe' === $_POST['stripe_price_type'] ) {
@@ -276,7 +276,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 
 						// Bail if susbscription is not active
 						if ( 'active' !== $subscription->status ) {
-							$transaction_status['stripe_message'] = __( 'Failed to create a subscription. Please check your card and try it again later.', 'learndash-lessons-selling' );
+							$transaction_status['stripe_message'] = __( 'Failed to create a subscription. Please check your card and try it again later.', 'learndash-extend-expiry' );
 							$this->show_notification( $transaction_status );
 						}
 
@@ -304,7 +304,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( \Stripe\Error\Authetication $e ) {
@@ -312,7 +312,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please contact website administrator.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( \Stripe\Error\ApiConnection $e ) {
@@ -320,7 +320,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( \Stripe\Error\Base $e ) {
@@ -328,13 +328,13 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 						$body  = $e->getJsonBody();
 						$error = $body['error'];
 
-						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error['message'] . ' ' . __( 'Please try again later.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 
 					} catch ( Exception $e ) {
-						$error = __( 'Unknown error.', 'learndash-lessons-selling' );
+						$error = __( 'Unknown error.', 'learndash-extend-expiry' );
 
-						$transaction_status['stripe_message'] = $error . ' ' . __( 'Please try again later.', 'learndash-lessons-selling' );
+						$transaction_status['stripe_message'] = $error . ' ' . __( 'Please try again later.', 'learndash-extend-expiry' );
 						$this->show_notification( $transaction_status );
 					}
 				}
@@ -364,20 +364,20 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe_Legacy_Checkout', false ) ) {
 				if ( true === $is_new_user ) {
 					$transaction_status['stripe_message'] = sprintf(
 					// translators: placeholder: LearnDash module name.
-						esc_html_x( 'The transaction was successful. Please check your email and log in to access the %s.', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( 'The transaction was successful. Please check your email and log in to access the %s.', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						$resource_label
 					);
 				} else {
 					if ( is_user_logged_in() ) {
 						$transaction_status['stripe_message'] = sprintf(
 						// translators: placeholder: LearnDash module name.
-							esc_html_x( 'The transaction was successful. You now have access the %s.', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+							esc_html_x( 'The transaction was successful. You now have access the %s.', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 							$resource_label
 						);
 					} else {
 						$transaction_status['stripe_message'] = sprintf(
 						// translators: placeholder: LearnDash module name.
-							esc_html_x( 'The transaction was successful. Please log in to access the %s.', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+							esc_html_x( 'The transaction was successful. Please log in to access the %s.', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 							$resource_label
 						);
 					}

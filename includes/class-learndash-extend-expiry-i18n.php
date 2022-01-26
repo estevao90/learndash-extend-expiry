@@ -23,7 +23,7 @@
  * @subpackage Learndash_Extend_Expiry/includes
  * @author     Estevão Costa <estevao90@gmail.com>
  */
-class Learndash_Lessons_Selling_I18n {
+class Learndash_Extend_Expiry_I18n {
 
 
 	/**
@@ -34,7 +34,7 @@ class Learndash_Lessons_Selling_I18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'learndash-lessons-selling',
+			'learndash-extend-expiry',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

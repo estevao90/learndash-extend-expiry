@@ -45,11 +45,11 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Access_Control', false ) ) {
 		}
 
 		public static function get_msg_login_required() {
-			return esc_html__( 'You must to be logged in to have access to this content', 'learndash-lessons-selling' );
+			return esc_html__( 'You must to be logged in to have access to this content', 'learndash-extend-expiry' );
 		}
 
 		public static function get_msg_access_denied() {
-			return esc_html__( "You don't currently have access to this content", 'learndash-lessons-selling' );
+			return esc_html__( "You don't currently have access to this content", 'learndash-extend-expiry' );
 		}
 
 		public static function update_resource_access( $user_id, $resource_id, $remove = false ) {
@@ -209,7 +209,7 @@ jQuery( "#ld-table-list-item-<?php echo esc_attr( $resource_id ); ?>" ).attr("da
 				case 'open':
 					$resource_access_str = sprintf(
 					// translators: placeholder: LearnDash module name.
-						esc_html_x( 'Open %s', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( 'Open %s', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						LearnDash_Custom_Label::get_label( self::get_label_for_ld_resource( $resource_id ) )
 					);
 					$status_icon_class = 'ld-icon-unlocked';
@@ -218,7 +218,7 @@ jQuery( "#ld-table-list-item-<?php echo esc_attr( $resource_id ); ?>" ).attr("da
 				case 'free':
 					$resource_access_str = sprintf(
 					// translators: placeholder: LearnDash module name.
-						esc_html_x( 'Free %s', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( 'Free %s', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						LearnDash_Custom_Label::get_label( self::get_label_for_ld_resource( $resource_id ) )
 					);
 					$status_icon_class = 'ld-icon-login';
@@ -227,7 +227,7 @@ jQuery( "#ld-table-list-item-<?php echo esc_attr( $resource_id ); ?>" ).attr("da
 				case 'paynow':
 				case 'subscribe':
 				case 'closed':
-					$resource_access_str = esc_html__( 'Sold individually', 'learndash-lessons-selling' );
+					$resource_access_str = esc_html__( 'Sold individually', 'learndash-extend-expiry' );
 					$status_icon_class   = 'ld-icon-materials';
 					break;
 

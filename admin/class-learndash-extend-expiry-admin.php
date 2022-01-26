@@ -19,7 +19,7 @@
  * @subpackage Learndash_Extend_Expiry/admin
  * @author     Estevão Costa <estevao90@gmail.com>
  */
-class Learndash_Lessons_Selling_Admin {
+class Learndash_Extend_Expiry_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class Learndash_Lessons_Selling_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Learndash_Lessons_Selling_Loader as all of the hooks are defined
+		 * defined in Learndash_Extend_Expiry_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Learndash_Lessons_Selling_Loader will then create the relationship
+		 * The Learndash_Extend_Expiry_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/learndash-lessons-selling-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/learndash-extend-expiry-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -85,7 +85,7 @@ class Learndash_Lessons_Selling_Admin {
 	public function enqueue_scripts() {
 		wp_enqueue_script(
 			$this->plugin_name,
-			plugin_dir_url( __FILE__ ) . 'js/learndash-lessons-selling-admin.js',
+			plugin_dir_url( __FILE__ ) . 'js/learndash-extend-expiry-admin.js',
 			array( 'jquery' ),
 			$this->version,
 			false
@@ -98,7 +98,7 @@ class Learndash_Lessons_Selling_Admin {
 			echo '<div class="notice notice-error is-dismissible"><p><strong>' .
 				sprintf(
 					/* translators: %s: LearnDash URL */
-					esc_html__( 'Sell Lessons for LearnDash requires LearnDash to be installed and active. Please download and install %s.', 'learndash-lessons-selling' ),
+					esc_html__( 'Sell Lessons for LearnDash requires LearnDash to be installed and active. Please download and install %s.', 'learndash-extend-expiry' ),
 					'<a href="https://www.learndash.com/" target="_blank">LearnDash</a>'
 				) .
 				'</strong></p></div>';

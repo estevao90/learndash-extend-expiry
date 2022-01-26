@@ -34,7 +34,7 @@ class Learndash_Extend_Expiry {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Learndash_Lessons_Selling_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Learndash_Extend_Expiry_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -66,12 +66,12 @@ class Learndash_Extend_Expiry {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'LEARNDASH_LESSONS_SELLING_VERSION' ) ) {
-			$this->version = LEARNDASH_LESSONS_SELLING_VERSION;
+		if ( defined( 'LEARNDASH_EXTEND_EXPIRY_VERSION' ) ) {
+			$this->version = LEARNDASH_EXTEND_EXPIRY_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'learndash-lessons-selling';
+		$this->plugin_name = 'learndash-extend-expiry';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -85,10 +85,10 @@ class Learndash_Extend_Expiry {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Learndash_Lessons_Selling_Loader. Orchestrates the hooks of the plugin.
-	 * - Learndash_Lessons_Selling_I18n. Defines internationalization functionality.
-	 * - Learndash_Lessons_Selling_Admin. Defines all hooks for the admin area.
-	 * - Learndash_Lessons_Selling_Public. Defines all hooks for the public side of the site.
+	 * - Learndash_Extend_Expiry_Loader. Orchestrates the hooks of the plugin.
+	 * - Learndash_Extend_Expiry_I18n. Defines internationalization functionality.
+	 * - Learndash_Extend_Expiry_Admin. Defines all hooks for the admin area.
+	 * - Learndash_Extend_Expiry_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -102,33 +102,33 @@ class Learndash_Extend_Expiry {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-learndash-lessons-selling-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-learndash-extend-expiry-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-learndash-lessons-selling-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-learndash-extend-expiry-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-learndash-lessons-selling-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-learndash-extend-expiry-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-learndash-lessons-selling-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-learndash-extend-expiry-public.php';
 
-		$this->loader = new Learndash_Lessons_Selling_Loader();
+		$this->loader = new Learndash_Extend_Expiry_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Learndash_Lessons_Selling_I18n class in order to set the domain and to register the hook
+	 * Uses the Learndash_Extend_Expiry_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -136,7 +136,7 @@ class Learndash_Extend_Expiry {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Learndash_Lessons_Selling_I18n();
+		$plugin_i18n = new Learndash_Extend_Expiry_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -151,7 +151,7 @@ class Learndash_Extend_Expiry {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Learndash_Lessons_Selling_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Learndash_Extend_Expiry_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'show_requirements' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -168,7 +168,7 @@ class Learndash_Extend_Expiry {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Learndash_Lessons_Selling_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Learndash_Extend_Expiry_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -199,7 +199,7 @@ class Learndash_Extend_Expiry {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Learndash_Lessons_Selling_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Learndash_Extend_Expiry_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

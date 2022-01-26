@@ -9,7 +9,7 @@ if ( ! class_exists( 'Imm_Learndash_Topic_Sell', false ) ) {
 		public function __construct() {
 			parent::__construct(
 				'topic',
-				esc_html__( 'topic', 'learndash-lessons-selling' )
+				esc_html__( 'topic', 'learndash-extend-expiry' )
 			);
 
 			// add hooks

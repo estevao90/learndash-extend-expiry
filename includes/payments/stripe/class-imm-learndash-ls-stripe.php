@@ -18,12 +18,12 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Stripe', false ) ) {
 
 			$options = get_option( 'learndash_stripe_settings', array() );
 
-			require_once LEARNDASH_LESSONS_SELLING_PLUGIN_DIR . 'includes/payments/stripe/class-imm-learndash-ls-stripe-base.php';
+			require_once LEARNDASH_EXTEND_EXPIRY_PLUGIN_DIR . 'includes/payments/stripe/class-imm-learndash-ls-stripe-base.php';
 
 			if ( isset( $options['integration_type'] ) && 'legacy_checkout' === $options['integration_type'] ) {
-				include LEARNDASH_LESSONS_SELLING_PLUGIN_DIR . 'includes/payments/stripe/class-imm-learndash-ls-stripe-legacy-checkout.php';
+				include LEARNDASH_EXTEND_EXPIRY_PLUGIN_DIR . 'includes/payments/stripe/class-imm-learndash-ls-stripe-legacy-checkout.php';
 			} else {
-				include LEARNDASH_LESSONS_SELLING_PLUGIN_DIR . 'includes/payments/stripe/class-imm-learndash-ls-stripe-checkout.php';
+				include LEARNDASH_EXTEND_EXPIRY_PLUGIN_DIR . 'includes/payments/stripe/class-imm-learndash-ls-stripe-checkout.php';
 			}
 		}
 

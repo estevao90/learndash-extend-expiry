@@ -34,19 +34,19 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 		
 		<div class="ld-course-status-segment ld-course-status-seg-status">
 
-		  <span class="ld-course-status-label"><?php echo esc_html__( 'Current Status', 'learndash-lessons-selling' ); ?></span>
+		  <span class="ld-course-status-label"><?php echo esc_html__( 'Current Status', 'learndash-extend-expiry' ); ?></span>
 	  
 			<div class="imm-ls-resource-status-content">
 				<span class="ld-status ld-status-waiting ld-tertiary-background" data-ld-tooltip="
 				<?php
 					printf(
 						// translators: placeholder: LearnDash module name
-						esc_attr_x( 'Enroll in this %s to get access', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_attr_x( 'Enroll in this %s to get access', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						esc_html( Imm_Learndash_Ls_Access_Control::get_label_for_ld_resource( $resource_id ) )
 					);
 					?>
 				">
-				<?php esc_html_e( 'Not Enrolled', 'learndash-lessons-selling' ); ?></span>
+				<?php esc_html_e( 'Not Enrolled', 'learndash-extend-expiry' ); ?></span>
 			</div>
 	  
 		</div> <!--/.ld-course-status-segment-->
@@ -54,7 +54,7 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 		
 		<div class="ld-course-status-segment ld-course-status-seg-price">
 
-		<span class="ld-course-status-label"><?php echo esc_html__( 'Price', 'learndash-lessons-selling' ); ?></span>
+		<span class="ld-course-status-label"><?php echo esc_html__( 'Price', 'learndash-extend-expiry' ); ?></span>
 
 	  <div class="imm-ls-resource-status-content">
 
@@ -64,7 +64,7 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 						echo wp_kses_post( '<span class="ld-currency">' . learndash_30_get_currency_symbol() . '</span>' );
 					  echo wp_kses_post( $resource_pricing['price'] );
 				else :
-					$label = 'closed' === $resource_pricing['type'] ? __( 'Closed', 'learndash-lessons-selling' ) : __( 'Free', 'learndash-lessons-selling' );
+					$label = 'closed' === $resource_pricing['type'] ? __( 'Closed', 'learndash-extend-expiry' ) : __( 'Free', 'learndash-extend-expiry' );
 					echo esc_html( $label );
 				endif;
 
@@ -74,7 +74,7 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 					  <?php
 						echo sprintf(
 						// translators: Recurring duration message.
-							esc_html_x( 'Every %1$s %2$s', 'Recurring duration message', 'learndash-lessons-selling' ),
+							esc_html_x( 'Every %1$s %2$s', 'Recurring duration message', 'learndash-extend-expiry' ),
 							esc_html( $resource_pricing['interval'] ),
 							esc_html( $resource_pricing['frequency_label'] )
 						);
@@ -95,7 +95,7 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 	
 		<div class="<?php echo esc_attr( $course_status_class ); ?>">
 
-			<span class="ld-course-status-label"><?php echo esc_html_e( 'Get Started', 'learndash-lessons-selling' ); ?></span>
+			<span class="ld-course-status-label"><?php echo esc_html_e( 'Get Started', 'learndash-extend-expiry' ); ?></span>
 
 			<div class="imm-ls-resource-status-content">
 				<div class="ld-course-status-action">
@@ -112,9 +112,9 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 						if ( ! is_user_logged_in() ) :
 							echo '<span class="ld-text">';
 							if ( ! empty( $ld_payment_buttons ) ) {
-								esc_html_e( 'or', 'learndash-lessons-selling' );
+								esc_html_e( 'or', 'learndash-extend-expiry' );
 							}
-							echo '<a class="ld-login-text" href="' . esc_url( $login_url ) . '">' . esc_html__( 'Login', 'learndash-lessons-selling' ) . '</a></span>';
+							echo '<a class="ld-login-text" href="' . esc_url( $login_url ) . '">' . esc_html__( 'Login', 'learndash-extend-expiry' ) . '</a></span>';
 						endif;
 						break;
 					case ( 'closed' ):
@@ -122,7 +122,7 @@ $resource_pricing = Imm_Learndash_Settings_Helper::get_resource_price_details( $
 						if ( empty( $button ) ) :
 							echo '<span class="ld-text">' . sprintf(
 							// translators: placeholder: LearnDash module name
-								esc_html_x( 'This %s is currently closed', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+								esc_html_x( 'This %s is currently closed', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 								esc_html( Imm_Learndash_Ls_Access_Control::get_label_for_ld_resource( $resource_id ) )
 							)
 							. '</span>';

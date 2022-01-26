@@ -62,16 +62,16 @@ if ( ! class_exists( 'Imm_Learndash_Settings_Helper', false ) ) {
 
 				switch ( $frequency ) {
 					case ( 'D' ):
-						$label = _n( 'day', 'days', $interval, 'learndash-lessons-selling' );
+						$label = _n( 'day', 'days', $interval, 'learndash-extend-expiry' );
 						break;
 					case ( 'W' ):
-						$label = _n( 'week', 'weeks', $interval, 'learndash-lessons-selling' );
+						$label = _n( 'week', 'weeks', $interval, 'learndash-extend-expiry' );
 						break;
 					case ( 'M' ):
-						$label = _n( 'month', 'months', $interval, 'learndash-lessons-selling' );
+						$label = _n( 'month', 'months', $interval, 'learndash-extend-expiry' );
 						break;
 					case ( 'Y' ):
-						$label = _n( 'year', 'years', $interval, 'learndash-lessons-selling' );
+						$label = _n( 'year', 'years', $interval, 'learndash-extend-expiry' );
 						break;
 				}
 
@@ -188,10 +188,10 @@ if ( ! class_exists( 'Imm_Learndash_Settings_Helper', false ) ) {
 			${'selected_' . strtolower( $price_billing_t3 )} = 'selected="selected"';
 			return '<input min="1" max="90" step="1" name="imm_ls_selling_price_billing_p3" type="number" value="' . $price_billing_p3 . '" class="small-text" />
 					<select class="select_course_price_billing_p3" name="imm_ls_selling_price_billing_t3">
-						<option value="D" ' . $selected_d . '>' . esc_html__( 'day(s)', 'learndash-lessons-selling' ) . '</option>
-						<option value="W" ' . $selected_w . '>' . esc_html__( 'week(s)', 'learndash-lessons-selling' ) . '</option>
-						<option value="M" ' . $selected_m . '>' . esc_html__( 'month(s)', 'learndash-lessons-selling' ) . '</option>
-						<option value="Y" ' . $selected_y . '>' . esc_html__( 'year(s)', 'learndash-lessons-selling' ) . '</option>
+						<option value="D" ' . $selected_d . '>' . esc_html__( 'day(s)', 'learndash-extend-expiry' ) . '</option>
+						<option value="W" ' . $selected_w . '>' . esc_html__( 'week(s)', 'learndash-extend-expiry' ) . '</option>
+						<option value="M" ' . $selected_m . '>' . esc_html__( 'month(s)', 'learndash-extend-expiry' ) . '</option>
+						<option value="Y" ' . $selected_y . '>' . esc_html__( 'year(s)', 'learndash-extend-expiry' ) . '</option>
 					</select>';
 		}
 

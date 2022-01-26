@@ -24,7 +24,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Payment_Integration', false ) ) {
 				esc_html_x(
 					'Take this %1$s',
 					'placeholder: LearnDash module name',
-					'learndash-lessons-selling'
+					'learndash-extend-expiry'
 				),
 				ucfirst( Imm_Learndash_Ls_Access_Control::get_label_for_ld_resource( $resource_id ) )
 			);
@@ -71,9 +71,9 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Payment_Integration', false ) ) {
 					$post_title = str_replace( array( '[', ']' ), array( '', '' ), get_the_title( $resource_id ) );
 
 					if ( 'paynow' === $resource_pricing['type'] ) {
-						$shortcode_content = do_shortcode( '[paypal type="paynow" amount="' . $resource_pricing['price'] . '" sandbox="' . $paypal_settings['paypal_sandbox'] . '" email="' . $paypal_settings['paypal_email'] . '" itemno="' . $resource_id . '" name="' . $post_title . '" noshipping="1" nonote="1" qty="1" currencycode="' . $paypal_settings['paypal_currency'] . '" rm="2" notifyurl="' . $paypal_settings['imm_ls_selling_paypal_notifyurl'] . '" returnurl="' . $paypal_settings['paypal_returnurl'] . '" cancelurl="' . $paypal_settings['paypal_cancelurl'] . '" imagewidth="100px" pagestyle="paypal" lc="' . $paypal_settings['paypal_country'] . '" cbt="' . esc_html__( 'Complete Your Purchase', 'learndash-lessons-selling' ) . '" custom="' . $user_id . '"]' );
+						$shortcode_content = do_shortcode( '[paypal type="paynow" amount="' . $resource_pricing['price'] . '" sandbox="' . $paypal_settings['paypal_sandbox'] . '" email="' . $paypal_settings['paypal_email'] . '" itemno="' . $resource_id . '" name="' . $post_title . '" noshipping="1" nonote="1" qty="1" currencycode="' . $paypal_settings['paypal_currency'] . '" rm="2" notifyurl="' . $paypal_settings['imm_ls_selling_paypal_notifyurl'] . '" returnurl="' . $paypal_settings['paypal_returnurl'] . '" cancelurl="' . $paypal_settings['paypal_cancelurl'] . '" imagewidth="100px" pagestyle="paypal" lc="' . $paypal_settings['paypal_country'] . '" cbt="' . esc_html__( 'Complete Your Purchase', 'learndash-extend-expiry' ) . '" custom="' . $user_id . '"]' );
 					} elseif ( 'subscribe' === $resource_pricing['type'] ) {
-						$shortcode_content = do_shortcode( '[paypal type="subscribe" a3="' . $resource_pricing['price'] . '" p3="' . $resource_pricing['interval'] . '" t3="' . $resource_pricing['frequency'] . '" sandbox="' . $paypal_settings['paypal_sandbox'] . '" email="' . $paypal_settings['paypal_email'] . '" itemno="' . $resource_id . '" name="' . $post_title . '" noshipping="1" nonote="1" qty="1" currencycode="' . $paypal_settings['paypal_currency'] . '" rm="2" notifyurl="' . $paypal_settings['imm_ls_selling_paypal_notifyurl'] . '" cancelurl="' . $paypal_settings['paypal_cancelurl'] . '" returnurl="' . $paypal_settings['paypal_returnurl'] . '" imagewidth="100px" pagestyle="paypal" lc="' . $paypal_settings['paypal_country'] . '" cbt="' . esc_html__( 'Complete Your Purchase', 'learndash-lessons-selling' ) . '" custom="' . $user_id . '"]' );
+						$shortcode_content = do_shortcode( '[paypal type="subscribe" a3="' . $resource_pricing['price'] . '" p3="' . $resource_pricing['interval'] . '" t3="' . $resource_pricing['frequency'] . '" sandbox="' . $paypal_settings['paypal_sandbox'] . '" email="' . $paypal_settings['paypal_email'] . '" itemno="' . $resource_id . '" name="' . $post_title . '" noshipping="1" nonote="1" qty="1" currencycode="' . $paypal_settings['paypal_currency'] . '" rm="2" notifyurl="' . $paypal_settings['imm_ls_selling_paypal_notifyurl'] . '" cancelurl="' . $paypal_settings['paypal_cancelurl'] . '" returnurl="' . $paypal_settings['paypal_returnurl'] . '" imagewidth="100px" pagestyle="paypal" lc="' . $paypal_settings['paypal_country'] . '" cbt="' . esc_html__( 'Complete Your Purchase', 'learndash-extend-expiry' ) . '" custom="' . $user_id . '"]' );
 					}
 
 					if ( ! empty( $shortcode_content ) ) {
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Imm_Learndash_Ls_Payment_Integration', false ) ) {
 						$dropdown_button .= '<div id="jq-dropdown-' . esc_attr( $resource_id ) . '" class="jq-dropdown jq-dropdown-tip checkout-dropdown-button">';
 						$dropdown_button .= '<ul class="jq-dropdown-menu">';
 						$dropdown_button .= '<li>';
-						$dropdown_button .= str_replace( $button_text, esc_html__( 'Use Paypal', 'learndash-lessons-selling' ), $payment_buttons );
+						$dropdown_button .= str_replace( $button_text, esc_html__( 'Use Paypal', 'learndash-extend-expiry' ), $payment_buttons );
 						$dropdown_button .= '</li>';
 						$dropdown_button .= '</ul>';
 						$dropdown_button .= '</div>';

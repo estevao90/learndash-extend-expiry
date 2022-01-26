@@ -19,7 +19,7 @@
  * @subpackage Learndash_Extend_Expiry/public
  * @author     Estevão Costa <estevao90@gmail.com>
  */
-class Learndash_Lessons_Selling_Public {
+class Learndash_Extend_Expiry_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -61,7 +61,7 @@ class Learndash_Lessons_Selling_Public {
 	public function enqueue_styles() {
 		wp_enqueue_style(
 			$this->plugin_name,
-			plugin_dir_url( __FILE__ ) . 'css/learndash-lessons-selling-public.css',
+			plugin_dir_url( __FILE__ ) . 'css/learndash-extend-expiry-public.css',
 			array(),
 			$this->version,
 			'all'
@@ -76,7 +76,7 @@ class Learndash_Lessons_Selling_Public {
 	public function enqueue_scripts() {
 		wp_enqueue_script(
 			$this->plugin_name,
-			plugin_dir_url( __FILE__ ) . 'js/learndash-lessons-selling-public.js',
+			plugin_dir_url( __FILE__ ) . 'js/learndash-extend-expiry-public.js',
 			array( 'jquery' ),
 			$this->version,
 			false

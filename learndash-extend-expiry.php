@@ -33,11 +33,11 @@ if ( ! defined( 'WPINC' ) ) {
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  */
-define( 'LEARNDASH_LESSONS_SELLING_VERSION', '1.0.0' );
+define( 'LEARNDASH_EXTEND_EXPIRY_VERSION', '1.0.0' );
 
-if ( ! defined( 'LEARNDASH_LESSONS_SELLING_PLUGIN_DIR' ) ) {
+if ( ! defined( 'LEARNDASH_EXTEND_EXPIRY_PLUGIN_DIR' ) ) {
 	/**
-	 * Define LearnDash Lessons Selling plugin - Set the plugin install path.
+	 * Define LearnDash Extend Expiry plugin - Set the plugin install path.
 	 *
 	 * Will be set based on the WordPress define `WP_PLUGIN_DIR`.
 	 *
@@ -46,35 +46,35 @@ if ( ! defined( 'LEARNDASH_LESSONS_SELLING_PLUGIN_DIR' ) ) {
 	 *
 	 * @var string Directory path to plugin install directory.
 	 */
-	define( 'LEARNDASH_LESSONS_SELLING_PLUGIN_DIR', trailingslashit( str_replace( '\\', '/', WP_PLUGIN_DIR ) . '/' . basename( dirname( __FILE__ ) ) ) );
+	define( 'LEARNDASH_EXTEND_EXPIRY_PLUGIN_DIR', trailingslashit( str_replace( '\\', '/', WP_PLUGIN_DIR ) . '/' . basename( dirname( __FILE__ ) ) ) );
 }
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-learndash-lessons-selling-activator.php
+ * This action is documented in includes/class-learndash-extend-expiry-activator.php
  */
-function activate_learndash_lessons_selling() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-learndash-lessons-selling-activator.php';
-	Learndash_Lessons_Selling_Activator::activate();
+function activate_learndash_extend_expiry() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-learndash-extend-expiry-activator.php';
+	Learndash_Extend_Expiry_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-learndash-lessons-selling-deactivator.php
+ * This action is documented in includes/class-learndash-extend-expiry-deactivator.php
  */
-function deactivate_learndash_lessons_selling() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-learndash-lessons-selling-deactivator.php';
-	Learndash_Lessons_Selling_Deactivator::deactivate();
+function deactivate_learndash_extend_expiry() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-learndash-extend-expiry-deactivator.php';
+	Learndash_Extend_Expiry_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_learndash_lessons_selling' );
-register_deactivation_hook( __FILE__, 'deactivate_learndash_lessons_selling' );
+register_activation_hook( __FILE__, 'activate_learndash_extend_expiry' );
+register_deactivation_hook( __FILE__, 'deactivate_learndash_extend_expiry' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-learndash-lessons-selling.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-learndash-extend-expiry.php';
 
 /**
  * Begins execution of the plugin.
@@ -85,10 +85,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-learndash-lessons-selling.
  *
  * @since    1.0.0
  */
-function run_learndash_lessons_selling() {
+function run_learndash_extend_expiry() {
 
 	$plugin = new Learndash_Extend_Expiry();
 	$plugin->run();
 
 }
-run_learndash_lessons_selling();
+run_learndash_extend_expiry();

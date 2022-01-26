@@ -34,7 +34,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 					'name'                => 'imm_ls_selling_sell_individually',
 					'label'               => sprintf(
 					// translators: placeholder: LearnDash module name.
-						esc_html_x( 'Sell this %s individually', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( 'Sell this %s individually', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						$this->ld_i18n_module_name
 					),
 					'type'                => 'checkbox-switch',
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 							esc_html_x(
 								'The access mode of this %s is controlled individually',
 								'placeholder: LearnDash module name',
-								'learndash-lessons-selling'
+								'learndash-extend-expiry'
 							),
 							$this->ld_i18n_module_name
 						),
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 						esc_html_x(
 							'If enabled, you will be able to control the access mode of this %s individually.',
 							'placeholder: LearnDash module name',
-							'learndash-lessons-selling'
+							'learndash-extend-expiry'
 						),
 						$this->ld_i18n_module_name
 					),
@@ -66,44 +66,44 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 
 				$setting_option_fields['imm_ls_selling_price_type'] = array(
 					'name'           => 'imm_ls_selling_price_type',
-					'label'          => esc_html__( 'Access Mode', 'learndash-lessons-selling' ),
+					'label'          => esc_html__( 'Access Mode', 'learndash-extend-expiry' ),
 					'type'           => 'radio',
 					'value'          => $this->helper->setting_option_values['imm_ls_selling_price_type'],
 					'default'        => LEARNDASH_DEFAULT_COURSE_PRICE_TYPE,
 					'parent_setting' => 'imm_ls_selling_sell_individually',
 					'options'        => array(
 						'open'      => array(
-							'label'       => esc_html__( 'Open', 'learndash-lessons-selling' ),
+							'label'       => esc_html__( 'Open', 'learndash-extend-expiry' ),
 							'description' => sprintf(
 							// translators: placeholder: LearnDash module name.
 								esc_html_x(
 									'The %s is not protected. Any user can access its content without the need to be logged-in or enrolled.',
 									'placeholder: LearnDash module name.',
-									'learndash-lessons-selling'
+									'learndash-extend-expiry'
 								),
 								$this->ld_i18n_module_name
 							),
 						),
 						'free'      => array(
-							'label'       => esc_html__( 'Free', 'learndash-lessons-selling' ),
+							'label'       => esc_html__( 'Free', 'learndash-extend-expiry' ),
 							'description' => sprintf(
 							// translators: placeholder: LearnDash module name.
 								esc_html_x(
 									'The %s is protected. Registration and enrollment are required in order to access the content.',
 									'placeholder: LearnDash module name.',
-									'learndash-lessons-selling'
+									'learndash-extend-expiry'
 								),
 								$this->ld_i18n_module_name
 							),
 						),
 						'paynow'    => array(
-							'label'               => esc_html__( 'Buy now', 'learndash-lessons-selling' ),
+							'label'               => esc_html__( 'Buy now', 'learndash-extend-expiry' ),
 							'description'         => sprintf(
 							// translators: placeholder: LearnDash module name, LearnDash module name.
 								esc_html_x(
 									'The %1$s is protected via the LearnDash built-in PayPal and/or Stripe. Users need to purchase the %2$s (one-time fee) in order to gain access.',
 									'placeholder: LearnDash module name, LearnDash module name',
-									'learndash-lessons-selling'
+									'learndash-extend-expiry'
 								),
 								$this->ld_i18n_module_name,
 								$this->ld_i18n_module_name
@@ -114,13 +114,13 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 							'inner_section_state' => ( 'paynow' === $this->helper->setting_option_values['imm_ls_selling_price_type'] ) ? 'open' : 'closed',
 						),
 						'subscribe' => array(
-							'label'               => esc_html__( 'Recurring', 'learndash-lessons-selling' ),
+							'label'               => esc_html__( 'Recurring', 'learndash-extend-expiry' ),
 							'description'         => sprintf(
 							// translators: placeholder: LearnDash module name, LearnDash module name.
 								esc_html_x(
 									'The %1$s is protected via the LearnDash built-in PayPal and/or Stripe. Users need to purchase the %2$s (recurring fee) in order to gain access.',
 									'placeholder: LearnDash module name, LearnDash module name',
-									'learndash-lessons-selling'
+									'learndash-extend-expiry'
 								),
 								$this->ld_i18n_module_name,
 								$this->ld_i18n_module_name
@@ -131,13 +131,13 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 							'inner_section_state' => ( 'subscribe' === $this->helper->setting_option_values['imm_ls_selling_price_type'] ) ? 'open' : 'closed',
 						),
 						'closed'    => array(
-							'label'               => esc_html__( 'Closed', 'learndash-lessons-selling' ),
+							'label'               => esc_html__( 'Closed', 'learndash-extend-expiry' ),
 							'description'         => sprintf(
 							// translators: placeholder: LearnDash module name, group.
 								esc_html_x(
 									'The %1$s can only be accessed through admin enrollment (manual), %2$s enrollment, or integration (shopping cart or membership) enrollment. No enrollment button will be displayed, unless a URL is set (optional).',
 									'placeholder: LearnDash module name, group',
-									'learndash-lessons-selling'
+									'learndash-extend-expiry'
 								),
 								$this->ld_i18n_module_name,
 								learndash_get_custom_label_lower( 'group' )
@@ -162,7 +162,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 					'name'    => 'imm_ls_selling_price_type_paynow',
 					'label'   => sprintf(
 						// translators: placeholder: LearnDash module name.
-						esc_html_x( '%s Price', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( '%s Price', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						ucfirst( $this->ld_i18n_module_name )
 					),
 					'type'    => 'number',
@@ -185,7 +185,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 					'name'    => 'imm_ls_selling_price_type_subscribe_price',
 					'label'   => sprintf(
 						// translators: placeholder: LearnDash module name.
-						esc_html_x( '%s Price', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( '%s Price', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						ucfirst( $this->ld_i18n_module_name )
 					),
 					'type'    => 'number',
@@ -199,7 +199,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 				),
 				'imm_ls_selling_price_type_subscribe_billing_cycle' => array(
 					'name'  => 'imm_ls_selling_price_type_subscribe_billing_cycle',
-					'label' => esc_html__( 'Billing Cycle', 'learndash-lessons-selling' ),
+					'label' => esc_html__( 'Billing Cycle', 'learndash-extend-expiry' ),
 					'type'  => 'custom',
 					'html'  => $this->helper->learndash_billing_cycle_html(),
 				),
@@ -215,7 +215,7 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 					'name'    => 'imm_ls_selling_price_type_closed_price',
 					'label'   => sprintf(
 						// translators: placeholder: LearnDash module name.
-						esc_html_x( '%s Price', 'placeholder: LearnDash module name', 'learndash-lessons-selling' ),
+						esc_html_x( '%s Price', 'placeholder: LearnDash module name', 'learndash-extend-expiry' ),
 						ucfirst( $this->ld_i18n_module_name )
 					),
 					'type'    => 'number',
@@ -229,14 +229,14 @@ if ( ! class_exists( 'Imm_Learndash_Sell_Settings', false ) ) {
 				),
 				'imm_ls_selling_price_type_closed_custom_button_url' => array(
 					'name'      => 'imm_ls_selling_price_type_closed_custom_button_url',
-					'label'     => esc_html__( 'Button URL', 'learndash-lessons-selling' ),
+					'label'     => esc_html__( 'Button URL', 'learndash-extend-expiry' ),
 					'type'      => 'text',
 					'class'     => 'full-text',
 					'value'     => $this->helper->setting_option_values['imm_ls_selling_price_type_closed_custom_button_url'],
 					'help_text' => sprintf(
 						// translators: placeholder: "Take this" button label, LearnDash module name
-						esc_html_x( 'Redirect the "%1$s %2$s" button to a specific URL.', 'placeholder: "Take this" button label, LearnDash module name', 'learndash-lessons-selling' ),
-						esc_html__( 'Take this', 'learndash-lessons-selling' ),
+						esc_html_x( 'Redirect the "%1$s %2$s" button to a specific URL.', 'placeholder: "Take this" button label, LearnDash module name', 'learndash-extend-expiry' ),
+						esc_html__( 'Take this', 'learndash-extend-expiry' ),
 						ucfirst( $this->ld_i18n_module_name )
 					),
 					'default'   => '',

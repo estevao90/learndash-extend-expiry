@@ -19,7 +19,7 @@
  * @subpackage Learndash_Extend_Expiry/includes
  * @author     Estevão Costa <estevao90@gmail.com>
  */
-class Learndash_Lessons_Selling_Deactivator {
+class Learndash_Extend_Expiry_Deactivator {
 
 	/**
 	 * Short Description. (use period)

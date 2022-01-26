@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! defined( 'LEARNDASH_VERSION' ) || ! defined( 'LEARNDASH_LESSONS_SELLING_VERSION' ) ) {
+if ( ! defined( 'LEARNDASH_VERSION' ) || ! defined( 'LEARNDASH_EXTEND_EXPIRY_VERSION' ) ) {
 	exit;
 }
 
