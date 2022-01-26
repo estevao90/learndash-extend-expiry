@@ -335,5 +335,5 @@ jQuery( "#ld-table-list-item-<?php echo esc_attr( $resource_id ); ?>" ).attr("da
 			return $step_price_type;
 		}
 	}
-	new Imm_Learndash_Ls_Access_Control();
+	// new Imm_Learndash_Ls_Access_Control();
 }

@@ -12,7 +12,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
+ * Defines the plugin name, version, and hooks for
  * enqueue the public-facing stylesheet and JavaScript.
  *
  * @package    Learndash_Extend_Expiry

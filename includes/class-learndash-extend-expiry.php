@@ -154,9 +154,6 @@ class Learndash_Extend_Expiry {
 		$plugin_admin = new Learndash_Extend_Expiry_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'show_requirements' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
 	}
 
 	/**
