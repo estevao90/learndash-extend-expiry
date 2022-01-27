@@ -5,10 +5,11 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Ld_Extend_Expiry_Control', false ) ) {
 
 	class Ld_Extend_Expiry_Control {
+		const POST_EXTEND_EXPIRY_ACTION = 'ld_extend_expiry';
 
 		public function __construct() {
-			// process form
-			add_action( 'wp', array( $this, 'ld_process_course_extend_expiry' ) );
+			// process post
+			add_action( 'admin_post_' . self::POST_EXTEND_EXPIRY_ACTION, array( $this, 'ld_process_course_extend_expiry' ) );
 
 			// process extend expiry
 			add_filter( 'ld_course_access_expires_on', array( $this, 'ld_course_access_expires_on' ), 10, 3 );
@@ -32,6 +33,9 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Control', false ) ) {
 			// update extend days
 			$extend_access_data += $ld_extend_days;
 			update_user_meta( $user_id, 'learndash_extend_expiry_course_' . $course_id, $extend_access_data );
+
+			// remove expired meta
+			delete_user_meta( $user_id, 'learndash_course_expired_' . $course_id );
 		}
 
 		public function ld_course_access_expires_on( $course_access_upto, $course_id, $user_id ) {
@@ -87,6 +91,9 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Control', false ) ) {
 
 			// extend days
 			self::ld_update_extend_expiry_access( $user_id, $post_id, $ld_extend_days );
+
+			// redirect to course
+			learndash_safe_redirect( get_permalink( $post_id ) );
 		}
 
 	}

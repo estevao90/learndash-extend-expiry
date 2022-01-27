@@ -20,8 +20,10 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Payment_Integration', false ) ) {
 
 			// in case of free price to extend days
 			if ( 0 === intval( $extend_price ) ) {
-				$extend_button = '<div class="learndash_extend_expiry_button"><form method="post">
+				$extend_button = '<div class="learndash_extend_expiry_button">
+                            <form action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" method="post">
                             <input type="hidden" value="' . $course_id . '" name="course_id" />
+                            <input type="hidden" value="' . Ld_Extend_Expiry_Control::POST_EXTEND_EXPIRY_ACTION . '" name="action" />
                             <input type="hidden" name="course_extend_expiry" value="' . wp_create_nonce( 'course_extend_expiry_' . $user_id . '_' . $course_id ) . '" />
                             <input type="submit" value="' . $button_text . '" id="btn-extend-expiry" />
                           </form></div>';
