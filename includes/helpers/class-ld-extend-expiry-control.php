@@ -39,6 +39,10 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Control', false ) ) {
 		}
 
 		public function ld_course_access_expires_on( $course_access_upto, $course_id, $user_id ) {
+			if ( empty( $course_access_upto ) ) {
+				return $course_access_upto; // expiry not set
+			}
+
 			$extend_access_data = get_user_meta( $user_id, 'learndash_extend_expiry_course_' . $course_id, true );
 			if ( abs( intval( $extend_access_data ) ) > 0 ) {
 				$course_access_upto += ( abs( intval( $extend_access_data ) ) * DAY_IN_SECONDS );
