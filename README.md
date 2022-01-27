@@ -4,6 +4,22 @@ Allow user purchase a course extension for a LearnDash course with a fixed expir
 
 [![Integration](https://github.com/estevao90/learndash-extend-expiry/workflows/Integration/badge.svg)](https://github.com/estevao90/learndash-extend-expiry/actions?query=workflow%3AIntegration)
 
+## Screenshots
+
+Allow to configure the extended access parameters for each course:
+![Course Expiration settings](screenshots/course_parameters.png "Course Expiration settings")
+
+Expired access warning with an action to extend access, when the user tries to access a expired course (free and paid version):
+![Expired Access Free](screenshots/expired_access_free.png "Expired Access Free")
+
+![Expired Access Paid](screenshots/expired_access_paid.png "Expired Access Paid")
+
+Configurable expire warning to alert user before course expiration:
+![Expire Warning](screenshots/expire_warning.png "Expire Warning")
+
+Paypal Integration with configurable notify URL to allow local tests:
+![Paypal configuration](screenshots/paypal_configuration.png "Paypal configuration")
+
 ## Development
 
 ```sh
@@ -12,7 +28,7 @@ composer install
 npm install
 ```
 
-### PayPal IPN test
+### Test PayPal IPN integration
 
 Use [localtunnel](https://github.com/localtunnel/localtunnel) to test PayPal IPN.
 
@@ -45,3 +61,11 @@ composer lint
 # run all fixes
 composer fix
 ```
+
+## Some future improvements
+
+- Configure CSS linting
+- Add a GitHub Action to automatically generate the zip file of the plugin
+- Add a GitHub Action to automatically publish the plugin to the WordPress.org repository
+- Code refactor to render the expiry warning through template
+- Add Stripe Integration
