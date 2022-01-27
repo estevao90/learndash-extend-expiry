@@ -10,17 +10,13 @@
     "php:fix": "phpcbf .",
     "js:lint": "npx eslint **/*.js --resolve-plugins-relative-to .",
     "js:fix": "npx eslint **/*.js --resolve-plugins-relative-to . --fix",
-    "css:lint": "npx stylelint **/*.{css,scss}",
-    "css:fix": "npx stylelint **/*.{css,scss} --fix",
     "lint": [
       "@php:lint",
-      "@js:lint",
-      "@css:lint"
+      "@js:lint"
     ],
     "fix": [
       "@php:fix",
-      "@js:fix",
-      "@css:fix"
+      "@js:fix"
     ]
   }
 }

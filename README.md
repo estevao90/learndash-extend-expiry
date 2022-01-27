@@ -35,11 +35,9 @@ composer php:lint
 # fix PHP fixable errors
 composer php:fix
 
-# same to css e js
+# same to js
 composer js:lint
 composer js:fix
-composer css:lint
-composer css:fix
 
 # run all lints
 composer lint

@@ -34,5 +34,3 @@ jobs:
         run: composer php:lint
       - name: Run JavaScript linting
         run: composer js:lint
-      - name: Run CSS linting
-        run: composer css:lint
