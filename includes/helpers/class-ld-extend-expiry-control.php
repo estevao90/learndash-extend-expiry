@@ -25,9 +25,12 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Control', false ) ) {
 				delete_user_meta( $user_id, 'learndash_extend_expiry_access_from_course_' . $course_id );
 
 				// calculate extend days increment based on old access from and current date
-				$current_extend_time   = time() - ( $extend_access_data * DAY_IN_SECONDS );
-				$extend_days_increment = ceil( ( $current_extend_time - $old_access_from ) / DAY_IN_SECONDS );
-				$ld_extend_days       += $extend_days_increment;
+				$course_access_upto = ld_course_access_expires_on( $course_id, $user_id );
+				$diff_today         = time() - $course_access_upto;
+				if ( $diff_today > 0 ) {
+						$extend_days_increment = ceil( $diff_today / DAY_IN_SECONDS );
+						$ld_extend_days       += $extend_days_increment;
+				}
 			}
 
 			// update extend days
