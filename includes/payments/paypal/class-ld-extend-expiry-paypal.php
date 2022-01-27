@@ -43,6 +43,7 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Paypal', false ) ) {
          // phpcs:ignore WordPress.Security.NonceVerification.Missing
 					$setting_value = esc_attr( $_POST['learndash_settings_paypal'][ self::SETTING_NAME ] );
 					update_option( self::SETTING_NAME, $setting_value );
+					learndash_setup_rewrite_flush();
 				}
 			}
 		}

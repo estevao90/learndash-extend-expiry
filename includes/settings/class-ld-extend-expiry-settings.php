@@ -15,7 +15,7 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Settings', false ) ) {
 			add_action( 'save_post', array( $this, 'save_additional_settings' ), 30, 1 );
 		}
 
-		private static function get_setting_value( $post_id, $setting_name, $default_value = '' ) {
+		public static function get_setting_value( $post_id, $setting_name, $default_value = '' ) {
 			$setting_value = learndash_get_setting( $post_id, $setting_name );
 			if ( '' === $setting_value ) {
 				$setting_value = $default_value;

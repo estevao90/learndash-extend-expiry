@@ -51,6 +51,9 @@ class Learndash_Extend_Expiry_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
+		// load LearnDash dependents functions
+		add_action( 'plugins_loaded', array( $this, 'require_learndash_dependents' ) );
+
 	}
 
 	/**
@@ -81,6 +84,12 @@ class Learndash_Extend_Expiry_Public {
 			$this->version,
 			false
 		);
+	}
+
+	public function require_learndash_dependents() {
+		if ( defined( 'LEARNDASH_LMS_PLUGIN_DIR' ) ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ld-extend-expiry-course-control.php';
+		}
 	}
 
 }

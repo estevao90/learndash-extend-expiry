@@ -2,3 +2,30 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+#btn-extend-expiry {
+	border-radius: 20px;
+	background-color: #00a2e8;
+	color: #fff;
+	box-shadow: none;
+	text-transform: none;
+	font-family: inherit;
+	font-weight: 800;
+	font-size: 0.75em;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	width: 100%;
+	max-width: 385px;
+	white-space: normal;
+	text-shadow: none;
+	border: 0;
+	opacity: 1;
+	transition: opacity 0.3s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+	padding: 1em;
+	line-height: 1.25em;
+	margin: 0;
+}

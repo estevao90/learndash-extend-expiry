@@ -245,144 +245,88 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Paypal_IPN' ) ) {
 		}
 
 		public static function ipn_process_post_data() {
-			self::$ipn_transaction_data['post_id']          = 0;
-			self::$ipn_transaction_data['post_type']        = '';
-			self::$ipn_transaction_data['post_type_prefix'] = '';
+			self::$ipn_transaction_data['post_id'] = 0;
 
 			self::$ipn_transaction_data['post_id']   = absint( self::$ipn_transaction_data['item_number'] );
-			self::$ipn_transaction_data['post_type'] = get_post_type( self::$ipn_transaction_data['post_id'] );
 			self::$ipn_transaction_data['course_id'] = learndash_get_course_id( self::$ipn_transaction_data['post_id'] );
 
-			if ( learndash_get_post_type_slug( 'lesson' ) === self::$ipn_transaction_data['post_type'] ) {
-				self::$ipn_transaction_data['post_type_prefix'] = 'lesson';
-				self::ipn_debug( 'Purchased Lesson access [' . self::$ipn_transaction_data['post_id'] . ']' );
-			} elseif ( learndash_get_post_type_slug( 'topic' ) === self::$ipn_transaction_data['post_type'] ) {
-				self::$ipn_transaction_data['post_type_prefix'] = 'topic';
-				self::ipn_debug( 'Purchased Topic access [' . self::$ipn_transaction_data['post_id'] . ']' );
-			} elseif ( learndash_get_post_type_slug( 'quiz' ) === self::$ipn_transaction_data['post_type'] ) {
-				self::$ipn_transaction_data['post_type_prefix'] = 'quiz';
-				self::ipn_debug( 'Purchased Quiz access [' . self::$ipn_transaction_data['post_id'] . ']' );
-			} else {
-				self::$ipn_transaction_data['post_type'] = '';
-			}
+			self::ipn_debug( 'Purchased Extend Access [' . self::$ipn_transaction_data['post_id'] . ']' );
 
-			if ( empty( self::$ipn_transaction_data['post_type'] ) ) {
-				self::ipn_debug( "ERROR: Invalid 'post_id' in IPN data. Unable to determine related LearnDash resource post." );
+			if ( empty( self::$ipn_transaction_data['course_id'] ) ) {
+				self::ipn_debug( "ERROR: Invalid 'post_id' in IPN data. Unable to determine related LearnDash course." );
 				self::ipn_exit();
 			}
 
-			if ( ( ! empty( self::$ipn_transaction_data['post_id'] ) ) && ( ! empty( self::$ipn_transaction_data['post_type_prefix'] ) ) ) {
-				$price_details    = Imm_Learndash_Settings_Helper::get_resource_price_details( self::$ipn_transaction_data['post_id'] );
-				$post_type_prefix = self::$ipn_transaction_data['post_type_prefix'];
+			$ld_extend_days  = intval( Ld_Extend_Expiry_Settings::get_setting_value( self::$ipn_transaction_data['course_id'], 'ld_extend_expiry_days', Ld_Extend_Expiry_Settings::DEFAULT_EXTEND_EXPIRY_DAYS ) );
+			$ld_extend_price = Ld_Extend_Expiry_Settings::get_setting_value( self::$ipn_transaction_data['course_id'], 'ld_extend_expiry_price', 0 );
+			if ( 0 === $ld_extend_days || $ld_extend_price <= 0 ) {
+				self::ipn_debug( 'ERROR: Extend Days or Extend Price missing on server. Aborting' );
+				self::ipn_exit();
+			}
+			self::$ipn_transaction_data['ld_extend_days'] = intval( $ld_extend_days );
 
-				if ( ! in_array( $price_details['type'], array( 'paynow', 'subscribe' ), true ) ) {
-					self::ipn_debug( 'ERROR: ' . ucfirst( self::$ipn_transaction_data['post_type_prefix'] ) . " Price Type setting not set to 'paynow', 'subscribe' or empty. Aborting" );
-					self::ipn_exit();
-				}
+			$server_extend_price = preg_replace( '/[^0-9.]/', '', $ld_extend_price );
+			$server_extend_price = number_format( floatval( $server_extend_price ), 2, '.', '' );
+			self::ipn_debug( 'Extend Price [' . $server_extend_price . ']' );
 
-				if ( ( ! isset( $price_details['price'] ) ) || ( empty( $price_details['price'] ) ) ) {
-					self::ipn_debug( 'ERROR: ' . ucfirst( self::$ipn_transaction_data['post_type_prefix'] ) . ' Price setting not set or empty. Aborting' );
-					self::ipn_exit();
-				}
+			$ipn_extend_price = preg_replace( '/[^0-9.]/', '', self::$ipn_transaction_data['mc_gross'] );
+			$ipn_extend_price = floatval( $ipn_extend_price );
+			self::ipn_debug( 'IPN GrossTax [' . $ipn_extend_price . ']' );
 
-				$server_course_price = preg_replace( '/[^0-9.]/', '', $price_details['price'] );
-				$server_course_price = number_format( floatval( $server_course_price ), 2, '.', '' );
-				self::ipn_debug( ucfirst( $post_type_prefix ) . ' Price [' . $server_course_price . ']' );
+			if ( isset( self::$ipn_transaction_data['tax'] ) ) {
+				$ipn_tax_price = preg_replace( '/[^0-9.]/', '', self::$ipn_transaction_data['tax'] );
+			} else {
+				$ipn_tax_price = 0;
+			}
+			$ipn_tax_price = floatval( $ipn_tax_price );
+			self::ipn_debug( 'IPN Tax [' . $ipn_tax_price . ']' );
 
-				$ipn_course_price = preg_replace( '/[^0-9.]/', '', self::$ipn_transaction_data['mc_gross'] );
-				$ipn_course_price = floatval( $ipn_course_price );
-				self::ipn_debug( 'IPN GrossTax [' . $ipn_course_price . ']' );
+			$ipn_extend_price = $ipn_extend_price - $ipn_tax_price;
+			$ipn_extend_price = number_format( floatval( $ipn_extend_price ), 2, '.', '' );
+			self::ipn_debug( 'IPN Gross - Tax (result) [' . $ipn_extend_price . ']' );
 
-				if ( isset( self::$ipn_transaction_data['tax'] ) ) {
-					$ipn_tax_price = preg_replace( '/[^0-9.]/', '', self::$ipn_transaction_data['tax'] );
-				} else {
-					$ipn_tax_price = 0;
-				}
-				$ipn_tax_price = floatval( $ipn_tax_price );
-				self::ipn_debug( 'IPN Tax [' . $ipn_tax_price . ']' );
-
-				$ipn_course_price = $ipn_course_price - $ipn_tax_price;
-				$ipn_course_price = number_format( floatval( $ipn_course_price ), 2, '.', '' );
-				self::ipn_debug( 'IPN Gross - Tax (result) [' . $ipn_course_price . ']' );
-
-				if ( floatval( $server_course_price ) === floatval( $ipn_course_price ) ) {
-					self::ipn_debug( 'IPN Price match: IPN Price [' . $ipn_course_price . '] ' . ucfirst( $post_type_prefix ) . ' Price [' . $server_course_price . ']' );
-				} else {
-					self::ipn_debug( 'Error: IPN Price mismatch: IPN Price [' . $ipn_course_price . '] ' . ucfirst( $post_type_prefix ) . ' Price [' . $server_course_price . ']' );
-					self::ipn_exit();
-				}
+			if ( floatval( $server_extend_price ) === floatval( $ipn_extend_price ) ) {
+				self::ipn_debug( 'IPN Price match: IPN Price [' . $ipn_extend_price . '] Server Price [' . $server_extend_price . ']' );
+			} else {
+				self::ipn_debug( 'Error: IPN Price mismatch: IPN Price [' . $ipn_extend_price . '] Server Price [' . $server_extend_price . ']' );
+				self::ipn_exit();
 			}
 		}
 
 		public static function ipn_process_user_data() {
-			// get / add user
-			$user = '';
 			if ( ! empty( self::$ipn_transaction_data['custom'] ) ) {
-				$user = get_user_by( 'id', absint( self::$ipn_transaction_data['custom'] ) );
-				if ( ( $user ) && ( is_a( $user, 'WP_User' ) ) ) {
-					self::ipn_debug( "Valid 'custom' in IPN data: [" . absint( self::$ipn_transaction_data['custom'] ) . ']. Matched to User ID [' . $user->ID . ']' );
-					self::$ipn_transaction_data['user_id'] = $user->ID;
+				$custom_data = explode( ';', self::$ipn_transaction_data['custom'] );
+				if ( 2 === count( $custom_data ) ) {
+					$user_id        = $custom_data[0];
+					$ld_extend_days = $custom_data[1];
 				} else {
-					$user = '';
-					self::ipn_debug( "Error: Unknown User ID 'custom' in IPN data: " . absint( self::$ipn_transaction_data['custom'] ) );
-					self::ipn_debug( "Continue processing to create new user from IPN 'payer_email'." );
+					self::ipn_debug( 'Error: Missing custom data in IPN data: ' . self::$ipn_transaction_data['custom'] );
+					self::ipn_exit();
 				}
+			} else {
+				self::ipn_debug( 'Error: Missing custom field in IPN data.' );
+				self::ipn_exit();
 			}
 
-			if ( empty( $user ) ) {
-				if ( self::$ipn_transaction_data['user_id'] = email_exists( self::$ipn_transaction_data['payer_email'] ) ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.Found, Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
-
-					self::ipn_debug( "IPN 'payer_email' matched to existing user. User Id: " . self::$ipn_transaction_data['user_id'] );
-					$user = get_user_by( 'id', self::$ipn_transaction_data['user_id'] );
-				} else {
-					self::ipn_debug( 'User email does not exists. Checking available username...' );
-					$username = self::$ipn_transaction_data['payer_email'];
-
-					if ( self::$ipn_transaction_data['user_id'] = username_exists( self::$ipn_transaction_data['payer_email'] ) ) { // phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.Found, Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
-
-						self::ipn_debug( 'Username matching email found, cannot use.' );
-						$count = 1;
-
-						do {
-							$new_username = $count . '_' . $email;
-							$count++;
-						} while ( username_exists( $new_username ) );
-
-						$username = $new_username;
-						self::ipn_debug( 'Accepting user with $username as :' . $new_username );
-					}
-
-					$random_password = wp_generate_password( 12, false );
-					self::ipn_debug( 'Creating User with username: ' . $username . ' email: ' . self::$ipn_transaction_data['payer_email'] );
-					self::$ipn_transaction_data['user_id'] = wp_create_user( $username, $random_password, self::$ipn_transaction_data['payer_email'] );
-					self::ipn_debug( 'User created with user_id: ' . self::$ipn_transaction_data['user_id'] );
-
-					// Handle all three versions of WP wp_new_user_notification
-					global $wp_version;
-					if ( version_compare( $wp_version, '4.3.0', '<' ) ) {
-						wp_new_user_notification( self::$ipn_transaction_data['user_id'], $user_pass ); // phpcs:ignore WordPress.WP.DeprecatedParameters.Wp_new_user_notificationParam2Found -- Wrapped in version_compare
-					} elseif ( version_compare( $wp_version, '4.3.0', '==' ) ) {
-						wp_new_user_notification( self::$ipn_transaction_data['user_id'], 'both' ); // phpcs:ignore WordPress.WP.DeprecatedParameters.Wp_new_user_notificationParam2Found -- Wrapped in version_compare
-					} elseif ( version_compare( $wp_version, '4.3.1', '>=' ) ) {
-						wp_new_user_notification( self::$ipn_transaction_data['user_id'], null, 'both' );
-					}
-					self::ipn_debug( 'New User Notification Sent.' );
-
-					$user = get_user_by( 'id', self::$ipn_transaction_data['user_id'] );
-
-					if ( ( ! empty( self::$ipn_transaction_data['first_name'] ) ) && ( ! empty( self::$ipn_transaction_data['first_name'] ) ) ) {
-						self::ipn_debug( 'Updating User: ' . self::$ipn_transaction_data['user_id'] . ' first_name: ' . self::$ipn_transaction_data['first_name'] . ' last_name: ' . self::$ipn_transaction_data['last_name'] );
-						wp_update_user(
-							array(
-								'ID'         => self::$ipn_transaction_data['user_id'],
-								'first_name' => self::$ipn_transaction_data['first_name'],
-								'last_name'  => self::$ipn_transaction_data['last_name'],
-							)
-						);
-					}
-				}
+			// get user
+			$user = get_user_by( 'id', absint( $user_id ) );
+			if ( ( $user ) && ( is_a( $user, 'WP_User' ) ) ) {
+				self::ipn_debug( "Valid 'custom user' in IPN data: [" . absint( $user_id ) . ']. Matched to User ID [' . $user->ID . ']' );
+				self::$ipn_transaction_data['user_id'] = $user->ID;
+			} else {
+				self::ipn_debug( "Error: Unknown User ID 'custom' in IPN data: " . absint( $user_id ) );
+				self::ipn_exit();
 			}
-			self::ipn_grant_access();
+
+			// validate extend days
+			if ( intval( $ld_extend_days ) === self::$ipn_transaction_data['ld_extend_days'] ) {
+				self::ipn_debug( 'IPN Extend Days match: IPN Days [' . self::$ipn_transaction_data['ld_extend_days'] . '] Server Days [' . $ld_extend_days . ']' );
+			} else {
+				self::ipn_debug( 'Error: IPN Extend Days mismatch: IPN Days [' . self::$ipn_transaction_data['ld_extend_days'] . '] Server Days [' . $ld_extend_days . ']' );
+				self::ipn_exit();
+			}
+
+			self::ipn_extend_access();
 		}
 
 		/**
@@ -427,7 +371,7 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Paypal_IPN' ) ) {
 			if ( empty( self::$ipn_transaction_post_id ) ) {
 				self::$ipn_transaction_post_id = wp_insert_post(
 					array(
-						'post_title'  => 'Imm LD Lessons Selling PayPal IPN Transaction',
+						'post_title'  => 'LearnDash LMS - Extend Expiry PayPal IPN Transaction',
 						'post_type'   => 'sfwd-transactions',
 						'post_status' => 'draft',
 						'post_author' => 0,
@@ -467,9 +411,8 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Paypal_IPN' ) ) {
 		public static function ipn_get_transaction_title() {
 			$transaction_post_title = '';
 			if ( ! empty( self::$ipn_transaction_data['post_id'] ) ) {
-				$resource_label         = Imm_Learndash_Ls_Access_Control::get_label_for_ld_resource( self::$ipn_transaction_data['post_id'] );
 				$post_title             = get_the_title( self::$ipn_transaction_data['post_id'] );
-				$transaction_post_title = ucfirst( $resource_label ) . ' ' . $post_title;
+				$transaction_post_title = __( 'Add more days', 'learndash-extend-expiry' ) . ' - ' . $post_title;
 			}
 
 			if ( empty( $transaction_post_title ) ) {
@@ -481,13 +424,11 @@ if ( ! class_exists( 'Ld_Extend_Expiry_Paypal_IPN' ) ) {
 			return $transaction_post_title;
 		}
 
-		public static function ipn_grant_access() {
+		public static function ipn_extend_access() {
 			if ( ( ! empty( self::$ipn_transaction_data['user_id'] ) ) && ( ! empty( self::$ipn_transaction_data['post_id'] ) ) ) {
-				self::$ipn_transaction_data['resource_id'] = absint( self::$ipn_transaction_data['post_id'] );
-
-				// record in ld resource
-				self::ipn_debug( 'Starting to give resource access: User ID[' . absint( self::$ipn_transaction_data['user_id'] ) . '] Resource[' . self::$ipn_transaction_data['resource_id'] . ']' );
-				Imm_Learndash_Ls_Access_Control::update_resource_access( absint( self::$ipn_transaction_data['user_id'] ), self::$ipn_transaction_data['resource_id'] );
+				// call the function to extend the access.
+				self::ipn_debug( 'Starting to extend access: User ID[' . absint( self::$ipn_transaction_data['user_id'] ) . '] Course[' . self::$ipn_transaction_data['course_id'] . '] Extend Days[' . self::$ipn_transaction_data['ld_extend_days'] . ']' );
+				Ld_Extend_Expiry_Control::ld_update_extend_expiry_access( absint( self::$ipn_transaction_data['user_id'] ), self::$ipn_transaction_data['course_id'], self::$ipn_transaction_data['ld_extend_days'] );
 			}
 		}
 
